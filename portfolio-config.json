@@ -1,0 +1,328 @@
+{
+  "project": {
+    "name": "portfolio",
+    "description": "Portfolio personnel ML engineer, moderne et minimaliste inspiré du style Andrew Ng, réalisé avec React + TypeScript + Tailwind CSS. Multilingue FR/EN, dark mode global, web performance optimisée, police Poppins, supporte déploiement moderne.",
+    "framework": "react",
+    "typescript": true,
+    "tailwind": {
+      "version": "3.x",
+      "darkMode": "class"
+    },
+    "font": "Poppins",
+    "deploy": ["vercel", "netlify", "github-pages"],
+    "package_manager": "npm",
+    "target": "modern"
+  },
+  "meta": {
+    "author": "Riandy",
+    "language_support": ["FR", "EN"],
+    "primary_cta": "Download CV",
+    "cv_path": "/cv.pdf"
+  },
+  "structure": {
+    "App.tsx": {
+      "description": "Conteneur global. Gère darkMode, état de la langue, et navigation scroll. Applique 'dark' sur <html> depuis la Navbar. Layout centré avec max-width fixe.",
+      "state": {
+        "darkMode": "boolean",
+        "language": "'FR'|'EN'"
+      },
+      "root_classes": "min-h-screen bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100 font-poppins"
+    },
+    "components": {
+      "Navbar.tsx": {
+        "description": "Navbar simple et épurée, SANS effet blur ni translucidité. Fond blanc/noir solide. Logo à gauche, navigation au centre, actions à droite. Border subtile en bas.",
+        "nav_wrapper_classes": "sticky top-0 left-0 w-full z-50 border-b border-gray-200 dark:border-gray-800",
+        "inner_container_classes": "max-w-6xl mx-auto flex justify-between items-center px-6 py-4 bg-white dark:bg-gray-950",
+        "elements": [
+          {"left": "Logo/nom simple (« Riandy » ou « R. ») en text-xl font-semibold"},
+          {"center": "Navigation horizontale simple (About, Publications/Projects, Contact) avec espacement généreux"},
+          {"right": ["Language Toggle (FR/EN) – texte simple ou bouton discret", "Dark mode toggle (icône lune/soleil)", "CV download (bouton primaire)"]}
+        ],
+        "style_notes": "Minimaliste, pas d'ombres portées, typographie sobre, liens avec hover underline simple",
+        "accessibility": {
+          "aria": {
+            "language_button": "change-language",
+            "dark_mode_button": "toggle-dark-mode"
+          }
+        }
+      },
+      "Hero.tsx": {
+        "description": "Section hero épurée et textuelle. SANS image de fond. Centré verticalement. Hiérarchie typographique claire avec nom, titre/rôle, description courte. Style académique/professionnel sobre.",
+        "classes": "flex flex-col items-center justify-center text-center min-h-[80vh] px-6 bg-white dark:bg-gray-950",
+        "content": {
+          "name": {"FR": "Riandy", "EN": "Riandy"},
+          "title": {
+            "FR": "Ingénieur Machine Learning",
+            "EN": "Machine Learning Engineer"
+          },
+          "subtitle": {
+            "FR": "Spécialisé en IA, deep learning et développement web. Passionné par les applications pratiques du ML pour résoudre des problèmes concrets.",
+            "EN": "Specialized in AI, deep learning and web development. Passionate about practical ML applications to solve real-world problems."
+          },
+          "cta": {
+            "text": {"FR": "Télécharger CV", "EN": "Download CV"},
+            "href": "/cv.pdf",
+            "download": true,
+            "style": "bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 px-6 py-3 rounded-md hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors"
+          }
+        },
+        "typography": {
+          "name": "text-5xl md:text-6xl font-bold mb-4",
+          "title": "text-2xl md:text-3xl font-medium text-gray-700 dark:text-gray-300 mb-6",
+          "subtitle": "text-base md:text-lg text-gray-600 dark:text-gray-400 max-w-2xl mb-8 leading-relaxed"
+        }
+      },
+      "About.tsx": {
+        "description": "Section About avec texte pur, SANS image. Layout simple en prose. Paragraphes bien espacés. Style académique sobre.",
+        "classes": "max-w-3xl mx-auto py-16 px-6",
+        "content": {
+          "heading": {"FR": "À propos", "EN": "About"},
+          "bio": {
+            "FR": "Je suis étudiant/ingénieur en informatique passionné par l'intelligence artificielle et le machine learning. Mon parcours combine formation académique rigoureuse et projets pratiques dans le domaine du ML et du développement web.\n\nMes domaines d'intérêt incluent le deep learning, l'analyse de données et la création d'applications web modernes. Je crois en l'importance de rendre la technologie accessible et utile pour résoudre des problèmes concrets.",
+            "EN": "I am a computer science student/engineer passionate about artificial intelligence and machine learning. My journey combines rigorous academic training with practical projects in ML and web development.\n\nMy areas of interest include deep learning, data analysis, and building modern web applications. I believe in making technology accessible and useful for solving real-world problems."
+          }
+        },
+        "typography": {
+          "heading": "text-3xl font-bold mb-8",
+          "paragraph": "text-base leading-relaxed text-gray-700 dark:text-gray-300 mb-4"
+        }
+      },
+      "Skills.tsx": {
+        "description": "Section compétences discrète. Liste simple de badges/tags horizontaux. PAS de grille complexe. Style minimaliste avec bordures fines.",
+        "classes": "max-w-4xl mx-auto py-16 px-6",
+        "heading": {"FR": "Compétences", "EN": "Skills"},
+        "layout": "flex flex-wrap gap-3 justify-center",
+        "badge_style": "px-4 py-2 bg-gray-100 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-full text-sm font-medium text-gray-700 dark:text-gray-300 hover:border-gray-400 dark:hover:border-gray-600 transition",
+        "badges": [
+          "Python", "React", "TypeScript", "Tailwind CSS", "Docker", "SQL", 
+          "Machine Learning", "Deep Learning", "Git", "FastAPI", "PyTorch", "TensorFlow"
+        ]
+      },
+      "Projects.tsx": {
+        "description": "Section projets/publications avec design list-based (vertical), style Andrew Ng. Chaque projet: titre + description courte + image thumbnail à gauche OU sans image + liens. Espacement généreux.",
+        "classes": "max-w-4xl mx-auto py-16 px-6",
+        "heading": {"FR": "Projets & Publications", "EN": "Projects & Publications"},
+        "layout": "space-y-8",
+        "card": {
+          "classes": "flex gap-6 pb-8 border-b border-gray-200 dark:border-gray-800 hover:border-gray-300 dark:hover:border-gray-700 transition",
+          "image_container": "flex-shrink-0 w-32 h-32 md:w-40 md:h-40",
+          "image_style": "object-cover w-full h-full rounded-lg bg-gray-100 dark:bg-gray-900",
+          "content_container": "flex-1 flex flex-col justify-center",
+          "title_style": "text-xl font-semibold mb-2 text-gray-900 dark:text-gray-100",
+          "description_style": "text-sm text-gray-600 dark:text-gray-400 leading-relaxed mb-3",
+          "links_style": "flex gap-4 text-sm"
+        },
+        "placeholder_items": [
+          {
+            "title": "Anomaly Detection in Public Spending (Madagascar)",
+            "description": {
+              "FR": "Pipeline ML explicable pour détecter les anomalies dans les dépenses publiques malgaches. Utilisation de techniques d'isolation forest et SHAP pour l'interprétabilité.",
+              "EN": "Explainable ML pipeline for detecting anomalies in Madagascar government spending. Using isolation forest and SHAP for interpretability."
+            },
+            "image": "/projects/anomaly-mg.webp",
+            "github": "https://github.com/riandy-pub/anomaly-public-spending-mg",
+            "demo": "",
+            "year": "2024"
+          },
+          {
+            "title": "Time Series Forecasting with Deep Learning",
+            "description": {
+              "FR": "Implémentation et comparaison de modèles LSTM et Prophet pour la prévision de séries temporelles (énergie, ventes). Évaluation sur données réelles.",
+              "EN": "Implementation and comparison of LSTM and Prophet models for time series forecasting (energy, sales). Evaluation on real-world data."
+            },
+            "image": "/projects/timeseries.webp",
+            "github": "https://github.com/riandy-pub/timeseries-forecasting",
+            "demo": "",
+            "year": "2024"
+          },
+          {
+            "title": "ML Web API Production Template",
+            "description": {
+              "FR": "Template FastAPI + Docker pour déployer des modèles ML en production. Inclut monitoring, logging et CI/CD pipeline.",
+              "EN": "FastAPI + Docker template for ML model production deployment. Includes monitoring, logging and CI/CD pipeline."
+            },
+            "image": "/projects/mlapi.webp",
+            "github": "https://github.com/riandy-pub/ml-fastapi-template",
+            "demo": "https://ml-api-demo.vercel.app",
+            "year": "2023"
+          }
+        ]
+      },
+      "Contact.tsx": {
+        "description": "Section contact ultra-simple. Texte centré + liste de liens (email, LinkedIn, GitHub) stylés sobrement. PAS de formulaire complexe.",
+        "classes": "max-w-2xl mx-auto py-16 px-6 text-center",
+        "heading": {"FR": "Contact", "EN": "Contact"},
+        "intro": {
+          "FR": "N'hésitez pas à me contacter pour discuter de projets, collaborations ou opportunités.",
+          "EN": "Feel free to reach out to discuss projects, collaborations or opportunities."
+        },
+        "links": [
+          {
+            "type": "email",
+            "label": "Email",
+            "value": "riandy@example.com",
+            "href": "mailto:riandy@example.com"
+          },
+          {
+            "type": "linkedin",
+            "label": "LinkedIn",
+            "value": "linkedin.com/in/riandy",
+            "href": "https://linkedin.com/in/riandy"
+          },
+          {
+            "type": "github",
+            "label": "GitHub",
+            "value": "github.com/riandy",
+            "href": "https://github.com/riandy"
+          }
+        ],
+        "link_style": "inline-block text-blue-600 dark:text-blue-400 hover:underline text-lg mb-4"
+      },
+      "Footer.tsx": {
+        "description": "Footer minimaliste avec copyright centré. Éventuellement lien retour en haut. Border top subtile.",
+        "classes": "border-t border-gray-200 dark:border-gray-800 py-8 text-center text-sm text-gray-600 dark:text-gray-400",
+        "content": "© 2024 Riandy. All rights reserved."
+      }
+    }
+  },
+  "features": {
+    "bilingual": {
+      "enabled": true,
+      "strategy": "single-state-prop",
+      "persistence": "localStorage (optionnelle)"
+    },
+    "darkMode": {
+      "enabled": true,
+      "control": "global state in App, applique 'dark' sur <html> via effect",
+      "tailwind": "dark: utility classes utilisées partout",
+      "default": "light"
+    },
+    "performance": {
+      "image_optimization": true,
+      "lazy_loading": true,
+      "vite_optimized_build": true,
+      "cdn_support": true
+    },
+    "accessibility": {
+      "aria_labels": true,
+      "keyboard_navigation": true,
+      "contrast_checks": true,
+      "focus_visible": true
+    }
+  },
+  "style_guide": {
+    "philosophy": "Minimalisme académique inspiré d'Andrew Ng. Privilégier le contenu sur la forme. Typographie claire, espaces généreux, couleurs sobres.",
+    "palette": {
+      "light": {
+        "bg": "white",
+        "surface": "gray-50",
+        "text": "gray-900",
+        "text_secondary": "gray-600",
+        "border": "gray-200",
+        "cta": "gray-900",
+        "link": "blue-600"
+      },
+      "dark": {
+        "bg": "gray-950",
+        "surface": "gray-900",
+        "text": "gray-100",
+        "text_secondary": "gray-400",
+        "border": "gray-800",
+        "cta": "gray-100",
+        "link": "blue-400"
+      }
+    },
+    "typography": {
+      "font_family": "Poppins",
+      "scale": {
+        "h1": "text-5xl md:text-6xl font-bold",
+        "h2": "text-3xl md:text-4xl font-bold",
+        "h3": "text-xl font-semibold",
+        "body": "text-base leading-relaxed",
+        "small": "text-sm"
+      },
+      "principles": [
+        "Hiérarchie claire",
+        "Lisibilité optimale (leading-relaxed)",
+        "Pas de décorations superflues"
+      ]
+    },
+    "spacing": {
+      "container_max_width": "max-w-4xl (sections About/Projects) | max-w-6xl (Navbar)",
+      "section_padding": "py-16 px-6",
+      "vertical_rhythm": "Espacement généreux entre sections (16-24)",
+      "element_spacing": "mb-4 à mb-8 selon importance"
+    },
+    "components": {
+      "buttons": {
+        "primary": "bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 px-6 py-3 rounded-md hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors font-medium",
+        "secondary": "border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 px-6 py-3 rounded-md hover:bg-gray-50 dark:hover:bg-gray-900 transition-colors"
+      },
+      "links": "text-blue-600 dark:text-blue-400 hover:underline transition",
+      "cards": "border border-gray-200 dark:border-gray-800 rounded-lg p-6 hover:border-gray-300 dark:hover:border-gray-700 transition",
+      "badges": "px-4 py-2 bg-gray-100 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-full text-sm"
+    },
+    "effects": {
+      "shadows": "Éviter les ombres portées. Privilégier les bordures fines.",
+      "blur": "PAS d'effet blur sur la navbar",
+      "transitions": "transition-colors ou transition pour effets subtils uniquement",
+      "hover": "Changements de border ou underline, pas d'effets dramatiques"
+    }
+  },
+  "design_principles": {
+    "core": [
+      "Minimalisme: Retirer tout ce qui n'est pas essentiel",
+      "Lisibilité: Typographie claire, espacement généreux",
+      "Professionnalisme: Style académique sobre",
+      "Contenu d'abord: Le design sert le contenu, pas l'inverse"
+    ],
+    "avoid": [
+      "Effets visuels complexes (blur, gradients flashy)",
+      "Animations excessives",
+      "Grilles complexes inutiles",
+      "Images décoratives sans valeur",
+      "Over-design des composants"
+    ]
+  },
+  "deliverables": {
+    "files": [
+      "package.json",
+      "tailwind.config.js",
+      "postcss.config.js",
+      "src/App.tsx",
+      "src/main.tsx",
+      "src/index.css",
+      "src/components/Navbar.tsx",
+      "src/components/Hero.tsx",
+      "src/components/About.tsx",
+      "src/components/Skills.tsx",
+      "src/components/Projects.tsx",
+      "src/components/Contact.tsx",
+      "src/components/Footer.tsx",
+      "public/cv.pdf",
+      "public/projects/*.webp (optionnel, peut être sans images)"
+    ],
+    "notes": "Style Andrew Ng: minimaliste, sobre, focus sur le contenu. Images optionnelles. Privilégier texte et typographie. Bordures fines plutôt qu'ombres."
+  },
+  "instructions": {
+    "generate_command": "Utiliser ce fichier comme spec complète",
+    "post_generate": [
+      "Personnaliser le contenu (bio, projets, liens)",
+      "Ajouter images de projets si souhaité (optionnel avec ce style)",
+      "Placer le CV dans /public/cv.pdf",
+      "Vérifier responsive mobile/desktop",
+      "Tester dark mode",
+      "Déployer sur Vercel/Netlify/GitHub Pages"
+    ],
+    "key_differences_from_original": [
+      "Navbar: fond solide (pas de blur), border bottom",
+      "Hero: texte uniquement, pas d'image de fond",
+      "About: sans photo de profil, texte en prose",
+      "Projects: layout vertical list-based (pas de grid), espacement généreux",
+      "Contact: liens simples (pas de formulaire complexe)",
+      "Couleurs: white/gray-950 (pas gray-50/gray-900)",
+      "Effets: bordures fines uniquement (pas d'ombres)",
+      "Philosophie: minimalisme académique extrême"
+    ]
+  }
+}
